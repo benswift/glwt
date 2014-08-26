@@ -12,10 +12,6 @@ option(BUILD_SHARED_LIBS "Build shared libraries" OFF)
 option(GLWT_USE_EGL "Use EGL" OFF)
 mark_as_advanced(GLWT_USE_EGL)
 
-if(BUILD_SHARED_LIBS)
-    message(FATAL_ERROR "TODO: building shared libs not supported!")
-endif()
-
 if (CMAKE_COMPILER_IS_GNUCC)
     add_definitions(-std=gnu99)
     add_definitions(-W -Wall -Wextra)
