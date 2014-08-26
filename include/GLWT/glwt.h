@@ -3,6 +3,12 @@
 
 #include <GLWT/glwt_keysym.h>
 
+#ifdef _WIN32
+#  define GLWTAPI __declspec( dllexport )
+#else
+#  define GLWTAPI
+#endif
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -64,33 +70,33 @@ typedef struct GLWTWindowEvent
     };
 } GLWTWindowEvent;
 
-int glwtInit(
+GLWTAPI int glwtInit(
     const GLWTConfig *config,
     void (*error_callback)(const char *msg, void *userdata),
     void *userdata
     );
-void glwtQuit();
+GLWTAPI void glwtQuit();
 
-GLWTWindow *glwtWindowCreate(
+GLWTAPI GLWTWindow *glwtWindowCreate(
     const char *title,
     int width, int height,
     GLWTWindow *share,
     void (*win_callback)(GLWTWindow *window, const GLWTWindowEvent *event, void *userdata),
     void *userdata
     );
-void glwtWindowDestroy(GLWTWindow *window);
+GLWTAPI void glwtWindowDestroy(GLWTWindow *window);
 
-int glwtWindowClosed(GLWTWindow *window);
-void glwtWindowShow(GLWTWindow *window, int show);
-void glwtWindowSetTitle(GLWTWindow *window, const char *title);
+GLWTAPI int glwtWindowClosed(GLWTWindow *window);
+GLWTAPI void glwtWindowShow(GLWTWindow *window, int show);
+GLWTAPI void glwtWindowSetTitle(GLWTWindow *window, const char *title);
 
-int glwtMakeCurrent(GLWTWindow *win);
-int glwtSwapBuffers(GLWTWindow *win);
-int glwtSwapInterval(GLWTWindow *win, int interval);
-int glwtWindowGetSize(GLWTWindow *win, int *width, int *height);
+GLWTAPI int glwtMakeCurrent(GLWTWindow *win);
+GLWTAPI int glwtSwapBuffers(GLWTWindow *win);
+GLWTAPI int glwtSwapInterval(GLWTWindow *win, int interval);
+GLWTAPI int glwtWindowGetSize(GLWTWindow *win, int *width, int *height);
 
-int glwtEventHandle(int wait);
-double glwtGetTime();
+GLWTAPI int glwtEventHandle(int wait);
+GLWTAPI double glwtGetTime();
 
 #ifdef __cplusplus
 }
