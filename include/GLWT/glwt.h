@@ -95,6 +95,8 @@ GLWTAPI int glwtSwapBuffers(GLWTWindow *win);
 GLWTAPI int glwtSwapInterval(GLWTWindow *win, int interval);
 GLWTAPI int glwtWindowGetSize(GLWTWindow *win, int *width, int *height);
 
+GLWTAPI void glwtFullscreen(GLWTWindow *window, int mode);
+
 GLWTAPI int glwtEventHandle(int wait);
 GLWTAPI double glwtGetTime();
 

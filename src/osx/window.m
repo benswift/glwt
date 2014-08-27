@@ -759,6 +759,27 @@ void glwtWindowShow(GLWTWindow *win, int show)
         [win->osx.nswindow orderOut:nil];
 }
 
+/* mode: 0 for windowed, 1 for fullscreen */
+void glwtFullscreen(GLWTWindow *win, int mode)
+{
+  if(mode){
+    NSScreen* mainScreen = [NSScreen mainScreen];
+    [win->osx.nswindow setStyleMask:NSBorderlessWindowMask];
+    [win->osx.nswindow setFrame:[mainScreen frame] display:YES];
+    [win->osx.nswindow setHasShadow:NO]; 
+    [win->osx.nswindow makeKeyAndOrderFront:nil];
+  }
+  else
+    {
+      [win->osx.nswindow setStyleMask:NSTitledWindowMask |
+                                      NSClosableWindowMask |
+                                      NSMiniaturizableWindowMask |
+                                      NSResizableWindowMask];
+      [win->osx.nswindow setFrame:NSMakeRect(0, 0, 640, 480)];
+      [win->osx.nswindow setHasShadow:YES];
+    }
+}
+
 int glwtMakeCurrent(GLWTWindow *win)
 {
     if (!win)
